@@ -38,8 +38,8 @@
                                 <c:forEach items="${rents}" var="rent">
                                 <tr>
                                     <td>${rent.id}.</td>
-                                    <td>${rent.description_vehicle}</td>
-                                    <td>${rent.description_client}</td>
+                                    <td>${rent.getVehicleInfos()}</td>
+                                    <td>${rent.getClientInfos()}</td>
                                     <td>${rent.debut}</td>
                                     <td>${rent.fin}</td>
                                     <td>

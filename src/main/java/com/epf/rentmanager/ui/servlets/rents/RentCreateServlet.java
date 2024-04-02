@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -45,21 +46,20 @@ public class RentCreateServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse
             response) throws ServletException, IOException {
-        String first_name = request.getParameter("first_name");
-        String last_name = request.getParameter("last_name");
-        String email = request.getParameter("email");
-        LocalDate date_of_birth = LocalDate.parse(request.getParameter("date_of_birth"));
 
         int client_id = Integer.parseInt(request.getParameter("client"));
-        int vehicle_id = Integer.parseInt(request.getParameter("vehicle"));
-        LocalDate debut = LocalDate.parse(request.getParameter("begin"));
-        LocalDate fin = LocalDate.parse(request.getParameter("end"));
+        int vehicle_id = Integer.parseInt(request.getParameter("car"));
+        System.out.println(vehicle_id);
+        LocalDate debut = LocalDate.parse(request.getParameter("begin"), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate fin = LocalDate.parse(request.getParameter("end"), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         Reservation reservation = new Reservation(client_id,vehicle_id,debut,fin);
+        System.out.println(reservation);
         try {
             this.reservationService.create(reservation);
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
+        response.sendRedirect(request.getContextPath() + "/rents");
     }
 }

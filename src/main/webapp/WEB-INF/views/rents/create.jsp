@@ -25,7 +25,7 @@
                     <!-- Horizontal Form -->
                     <div class="box">
                         <!-- form start -->
-                        <form class="form-horizontal" method="post" action="/rents/create">
+                        <form class="form-horizontal" method="post">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="car" class="col-sm-2 control-label">Voiture</label>
@@ -33,7 +33,7 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" id="car" name="car">
                                             <c:forEach items="${vehicles}" var="vehicle">
-                                                <option value="${vehicle.id}">${vehicle.constructeur} ${vehicle.modele}</option>
+                                                <option value="${vehicle.id}">${vehicle.id} - ${vehicle.constructeur} ${vehicle.modele}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -44,7 +44,7 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" id="client" name="client">
                                             <c:forEach items="${clients}" var="client">
-                                                <option value="${client.id}">${client.nom} ${client.prenom}</option>
+                                                <option value="${client.id}">${client.id} - ${client.nom} ${client.prenom}</option>
                                             </c:forEach>
                                         </select>
                                     </div>

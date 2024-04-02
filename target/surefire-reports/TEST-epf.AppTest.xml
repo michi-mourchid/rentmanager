@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="epf.AppTest" time="0.107" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="epf.AppTest" time="0.045" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="20"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-20\bin"/>
-    <property name="sun.java.command" value="C:\Users\michi\AppData\Local\Temp\surefire16143868522077791331\surefirebooter7437333545299722172.jar C:\Users\michi\AppData\Local\Temp\surefire16143868522077791331 2024-03-30T20-57-45_622-jvmRun1 surefire1731811546890121624tmp surefire_07614173009905401557tmp"/>
+    <property name="sun.java.command" value="C:\Users\michi\AppData\Local\Temp\surefire14768041115222528532\surefirebooter6125200582688304466.jar C:\Users\michi\AppData\Local\Temp\surefire14768041115222528532 2024-04-02T19-28-49_108-jvmRun1 surefire9346749640282661102tmp surefire_013795205471130245413tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\target\test-classes;D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\target\classes;C:\Users\michi\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\michi\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\michi\.m2\repository\com\h2database\h2\1.4.200\h2-1.4.200.jar;C:\Users\michi\.m2\repository\javax\servlet\javax.servlet-api\4.0.1\javax.servlet-api-4.0.1.jar;C:\Users\michi\.m2\repository\javax\annotation\javax.annotation-api\1.3.2\javax.annotation-api-1.3.2.jar;C:\Users\michi\.m2\repository\javax\servlet\jstl\1.2\jstl-1.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\michi\AppData\Local\Temp\surefire16143868522077791331\surefirebooter7437333545299722172.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\michi\AppData\Local\Temp\surefire14768041115222528532\surefirebooter6125200582688304466.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="20.0.2+9-78"/>
@@ -44,6 +44,7 @@
     <property name="localRepository" value="C:\Users\michi\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\michi\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2023.3.3"/>
     <property name="java.version" value="20.0.2"/>
     <property name="user.dir" value="D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager"/>
     <property name="os.arch" value="amd64"/>
@@ -58,5 +59,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="64.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="epf.AppTest" time="0.006"/>
+  <testcase name="shouldAnswerWithTrue" classname="epf.AppTest" time="0.005"/>
 </testsuite>

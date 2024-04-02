@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.dao.Exceptions.DaoException;
-import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.persistence.ConnectionManager;
 import com.epf.rentmanager.utils.IOUtils;
 
@@ -28,6 +27,7 @@ public class ReservationDao {
 	private static final String FIND_RESERVATIONS_BY_VEHICLE_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation WHERE vehicle_id=?;";
 	private static final String FIND_RESERVATION_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation WHERE id=?;";
 	private static final String FIND_RESERVATIONS_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation;";
+	private static final String COUNT_ALL_RESERVATIONS_QUERY = "SELECT COUNT(id) AS count FROM Reservation;";
 		
 	public long create(Reservation reservation) throws DaoException {
 
@@ -199,6 +199,28 @@ public class ReservationDao {
 			connection.close();
 			return reservations;
 
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public int count(){
+		try {
+			Connection connection = ConnectionManager.getConnection();
+			PreparedStatement ps = connection.prepareStatement(COUNT_ALL_RESERVATIONS_QUERY);
+			ps.execute();
+
+			int nbReservations=-1;
+			ResultSet rs = ps.getResultSet();
+
+			while (rs.next()){
+				nbReservations = rs.getInt("count");
+			}
+
+			ps.close();
+			connection.close();
+			System.out.println(nbReservations);
+			return nbReservations;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

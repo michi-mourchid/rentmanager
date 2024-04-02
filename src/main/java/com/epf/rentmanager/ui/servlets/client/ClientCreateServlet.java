@@ -39,5 +39,6 @@ public class ClientCreateServlet extends HttpServlet {
         } catch (ServiceException | DaoException e) {
             throw new RuntimeException(e);
         }
+        response.sendRedirect(request.getContextPath() + "/users");
     }
 }

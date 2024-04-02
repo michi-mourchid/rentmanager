@@ -20,7 +20,7 @@ public class VehicleCreateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse
             response) throws ServletException, IOException {
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/vehicle/create.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/views/vehicles/create.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse
@@ -35,5 +35,6 @@ public class VehicleCreateServlet extends HttpServlet {
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
+        response.sendRedirect(request.getContextPath() + "/vehicles");
     }
 }

@@ -4,6 +4,8 @@ import com.epf.rentmanager.dao.Exceptions.DaoException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.Exceptions.ServiceException;
+import com.epf.rentmanager.service.ReservationService;
+import com.epf.rentmanager.service.VehicleService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +18,7 @@ import java.util.List;
 @WebServlet("/users")
 public class ClientListServlet extends HttpServlet {
 
-    private ClientService clientService;
+    private static final ClientService clientService = ClientService.getInstance();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

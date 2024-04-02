@@ -55,10 +55,13 @@ public class ClientService {
         }
     }
 
-
 	public String delete(long id) throws ServiceException, DaoException {
 		Client client = findById(id);
 		return this.clientDao.delete(client);
+	}
+
+	public int count() throws ServiceException, DaoException{
+		return this.clientDao.count();
 	}
 	
 }

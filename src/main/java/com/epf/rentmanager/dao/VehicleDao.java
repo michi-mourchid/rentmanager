@@ -75,7 +75,7 @@ public class VehicleDao {
 
 		try {
 			Connection connection = ConnectionManager.getConnection();
-			PreparedStatement ps = connection.prepareStatement(COUNT_ALL_VEHICLES_QUERY);
+			PreparedStatement ps = connection.prepareStatement(FIND_VEHICLE_QUERY);
 			ps.setLong(1, id);
 			ps.execute();
 
@@ -128,7 +128,7 @@ public class VehicleDao {
 	public int count(){
 		try {
 			Connection connection = ConnectionManager.getConnection();
-			PreparedStatement ps = connection.prepareStatement(FIND_VEHICLE_QUERY);
+			PreparedStatement ps = connection.prepareStatement(COUNT_ALL_VEHICLES_QUERY);
 			ps.execute();
 
 			int nbVehicles=-1;

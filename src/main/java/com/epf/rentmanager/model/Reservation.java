@@ -1,5 +1,10 @@
 package com.epf.rentmanager.model;
 
+import com.epf.rentmanager.dao.Exceptions.DaoException;
+import com.epf.rentmanager.service.ClientService;
+import com.epf.rentmanager.service.Exceptions.ServiceException;
+import com.epf.rentmanager.service.VehicleService;
+
 import java.time.LocalDate;
 import java.sql.Date;
 
@@ -9,6 +14,8 @@ public class Reservation {
     private int vehicle_id;
     private LocalDate debut;
     private LocalDate fin;
+    private static final VehicleService vehicleService = VehicleService.getInstance();
+    private static final ClientService clientService = ClientService.getInstance();
 
     public Reservation() {
     }
@@ -77,5 +84,31 @@ public class Reservation {
 
     public void setFin(LocalDate fin) {
         this.fin = fin;
+    }
+
+    public String getVehicleInfos(){
+        String infos = null;
+        try {
+            infos = ""+ this.vehicleService.findById(vehicle_id).getConstructeur()+" "+this.vehicleService.findById(vehicle_id).getModele();
+            return infos;
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public String getClientInfos(){
+        String infos = null;
+        try {
+            infos = ""+ this.clientService.findById(client_id).getNom()+" "+this.clientService.findById(client_id).getPrenom();
+            return infos;
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

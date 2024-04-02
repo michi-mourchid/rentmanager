@@ -53,4 +53,8 @@ public class ReservationService {
         // TODO: récupérer tous les clients
         return this.reservationDao.findAll();
     }
+
+    public int count() throws ServiceException, DaoException{
+        return this.reservationDao.count();
+    }
 }
