@@ -17,6 +17,7 @@ import java.util.List;
 
 import static com.epf.rentmanager.ui.cli.ClientCLI.*;
 import static com.epf.rentmanager.ui.cli.VehicleCLI.*;
+import static com.epf.rentmanager.ui.cli.ReservationCLI.*;
 
 public class Interface {
 
@@ -46,10 +47,10 @@ public class Interface {
             IOUtils.print("5. Supprimer un client (bonus)");
             IOUtils.print("6. Supprimer un véhicule (bonus)");
             IOUtils.print("7. Créer une reservation");
-            IOUtils.print("8. Lister toutes les réservations");
-            IOUtils.print("9. Lister toutes les réservations d'un client");
-            IOUtils.print("10. Lister toutes les réservations d'un véhicule");
-            IOUtils.print("11. Supprimer une réservation");
+            IOUtils.print("8. Supprimer une réservation");
+            IOUtils.print("9. Lister toutes les réservations");
+            IOUtils.print("10. Lister toutes les réservations d'un client");
+            IOUtils.print("11. Lister toutes les réservations d'un véhicule");
             IOUtils.print("12. Quitter");
 
             int choice = IOUtils.readInt("Choisissez une option : ");
@@ -72,6 +73,21 @@ public class Interface {
                     break;
                 case 6:
                     deleteVehicle();
+                    break;
+                case 7:
+                    createReservation();
+                    break;
+                case 8:
+                    deleteReservation();
+                    break;
+                case 9:
+                    listReservations();
+                    break;
+                case 10:
+                    listReservationClient();
+                    break;
+                case 11:
+                    listReservationVehicle();
                     break;
                 case 12:
                     running = false;
@@ -220,28 +236,6 @@ public class Interface {
 
 //    private static void deleteReservation() {
 //        IOUtils.print("\n### Suppression d'une reservation ###");
-//        boolean running = true;
-//        while (running) {
-//            IOUtils.print("1. Identifier par Vehicule");
-//            IOUtils.print("2. Identifier par client");
-//            IOUtils.print("3. Identifier par Reservation");
-//            int choice = IOUtils.readInt("Choisissez une option : ");
-//            switch (choice) {
-//                case 1:
-//                    listReservationVehicle();
-//                    running = false;
-//                    break;
-//                case 2:
-//                    listReservationClient();
-//                    running = false;
-//                    break;
-//                case 3:
-//                    running = false;
-//                    break;
-//                default:
-//                    IOUtils.print("Option invalide. Veuillez réessayer.");
-//            }
-//        }
 //        int reservationId = IOUtils.readInt("Entrez l'ID de la réservation à supprimer : ");
 //
 //        try {

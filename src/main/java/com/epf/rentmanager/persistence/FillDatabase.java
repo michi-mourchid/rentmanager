@@ -84,6 +84,27 @@ public class FillDatabase {
             stmt.execute("INSERT INTO Client(nom, prenom, email, naissance) VALUES('Dupuis', 'Thomas', 'thomas.dupuis@email.com', '1982-08-15')");
 
 
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(3, 3, '2024-06-01', '2024-06-03')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(4, 4, '2024-06-05', '2024-06-07')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(5, 5, '2024-06-10', '2024-06-12')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(6, 6, '2024-06-15', '2024-06-17')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(7, 7, '2024-06-20', '2024-06-22')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(8, 8, '2024-06-25', '2024-06-27')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(9, 9, '2024-06-30', '2024-07-02')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(10, 10, '2024-07-05', '2024-07-07')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(1, 1, '2024-07-10', '2024-07-12')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(2, 2, '2024-07-15', '2024-07-17')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(1, 7, '2024-09-01', '2024-09-03')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(3, 10, '2024-09-05', '2024-09-07')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(6, 2, '2024-09-10', '2024-09-12')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(8, 4, '2024-09-15', '2024-09-17')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(10, 9, '2024-09-20', '2024-09-22')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(1, 2, '2024-08-01', '2024-08-03')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(2, 3, '2024-08-05', '2024-08-07')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(3, 4, '2024-08-10', '2024-08-12')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(4, 5, '2024-08-15', '2024-08-17')");
+            stmt.execute("INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(5, 6, '2024-08-20', '2024-08-22')");
+
             connection.commit();
             System.out.println("Success!");
         } catch (SQLException e) {

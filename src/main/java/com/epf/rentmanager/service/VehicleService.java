@@ -39,9 +39,9 @@ public class VehicleService {
 		}
 	}
 
-	public int delete(long id) throws ServiceException, DaoException {
-		Vehicle client = findById(id);
-		return this.vehicleDao.delete(client);
+	public boolean delete(long id) throws ServiceException, DaoException {
+		Vehicle vehicle = findById(id);
+		return this.vehicleDao.delete(vehicle);
 	}
 
 	public Vehicle findById(long id) throws ServiceException, DaoException {
@@ -52,6 +52,10 @@ public class VehicleService {
 	public List<Vehicle> findAll() throws ServiceException, DaoException {
 		// TODO: récupérer tous les clients
 		return this.vehicleDao.findAll();
+	}
+
+	public int count() throws ServiceException, DaoException{
+		return this.vehicleDao.count();
 	}
 	
 }
