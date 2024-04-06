@@ -1,10 +1,13 @@
 package com.epf.rentmanager.ui.servlets;
 
+import com.epf.rentmanager.configuration.AppConfiguration;
 import com.epf.rentmanager.dao.Exceptions.DaoException;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.Exceptions.ServiceException;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
 
@@ -21,9 +24,10 @@ public class HomeServlet extends HttpServlet {
      *
      */
     private static final long serialVersionUID = 1L;
-    private static final VehicleService vehicleService = VehicleService.getInstance();
-    private static final ClientService clientService = ClientService.getInstance();
-    private static final ReservationService reservationService = ReservationService.getInstance();
+    private static final ApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
+    private static final ClientService clientService = context.getBean(ClientService.class);
+    private static final ReservationService reservationService = context.getBean(ReservationService.class);
+    private static final VehicleService vehicleService = context.getBean(VehicleService.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

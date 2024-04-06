@@ -1,9 +1,12 @@
 package com.epf.rentmanager.model;
 
+import com.epf.rentmanager.configuration.AppConfiguration;
 import com.epf.rentmanager.dao.Exceptions.DaoException;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.Exceptions.ServiceException;
 import com.epf.rentmanager.service.VehicleService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDate;
 import java.sql.Date;
@@ -14,10 +17,12 @@ public class Reservation {
     private int vehicle_id;
     private LocalDate debut;
     private LocalDate fin;
-    private static final VehicleService vehicleService = VehicleService.getInstance();
-    private static final ClientService clientService = ClientService.getInstance();
+    ApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
+    ClientService clientService = context.getBean(ClientService.class);
+    VehicleService vehicleService = context.getBean(VehicleService.class);
 
     public Reservation() {
+
     }
 
     public Reservation(int id, int client_id, int vehicle_id, LocalDate debut, LocalDate fin) {

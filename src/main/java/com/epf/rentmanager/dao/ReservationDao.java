@@ -9,18 +9,11 @@ import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.dao.Exceptions.DaoException;
 import com.epf.rentmanager.persistence.ConnectionManager;
 import com.epf.rentmanager.utils.IOUtils;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ReservationDao {
 
-	private static ReservationDao instance = null;
-	private ReservationDao() {}
-	public static ReservationDao getInstance() {
-		if(instance == null) {
-			instance = new ReservationDao();
-		}
-		return instance;
-	}
-	
 	private static final String CREATE_RESERVATION_QUERY = "INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(?, ?, ?, ?);";
 	private static final String DELETE_RESERVATION_QUERY = "DELETE FROM Reservation WHERE id=?;";
 	private static final String FIND_RESERVATIONS_BY_CLIENT_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation WHERE client_id=?;";
@@ -28,6 +21,7 @@ public class ReservationDao {
 	private static final String FIND_RESERVATION_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation WHERE id=?;";
 	private static final String FIND_RESERVATIONS_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation;";
 	private static final String COUNT_ALL_RESERVATIONS_QUERY = "SELECT COUNT(id) AS count FROM Reservation;";
+	private static final String UPDATE_RESERVATION_QUERY = "UPDATE Reservation SET client_id=?, vehicle_id=?, debut=?, fin=? WHERE id=?;";
 		
 	public long create(Reservation reservation) throws DaoException {
 
@@ -223,6 +217,33 @@ public class ReservationDao {
 			return nbReservations;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	public void update(Reservation reservation) throws DaoException {
+
+		try{
+			Connection connection = ConnectionManager.getConnection();
+			PreparedStatement ps = connection.prepareStatement(UPDATE_RESERVATION_QUERY);
+
+			ps.setInt(1, Integer.parseInt(reservation.getClient_id()));
+			ps.setInt(2, Integer.parseInt(reservation.getVehicle_id()));
+			ps.setDate(3, reservation.getDebut());
+			ps.setDate(4, reservation.getFin());
+			ps.setInt(5,reservation.getId());
+
+			int affectedRows = ps.executeUpdate();
+			System.out.println(affectedRows);
+			if (affectedRows > 0) {
+			} else {
+				throw new DaoException();
+			}
+			ps.execute();
+			ps.close();
+			connection.close();
+
+		} catch (SQLException e){
+			System.out.println(e.toString());
 		}
 	}
 }

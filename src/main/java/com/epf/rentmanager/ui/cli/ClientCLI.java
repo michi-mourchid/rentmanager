@@ -1,10 +1,13 @@
 package com.epf.rentmanager.ui.cli;
 
+import com.epf.rentmanager.configuration.AppConfiguration;
 import com.epf.rentmanager.dao.Exceptions.DaoException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.*;
 import com.epf.rentmanager.service.Exceptions.ServiceException;
 import com.epf.rentmanager.utils.IOUtils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,7 +15,8 @@ import java.util.List;
 
 public class ClientCLI {
 
-    private static final ClientService clientService = ClientService.getInstance();
+    private static final ApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
+    private static final ClientService clientService = context.getBean(ClientService.class);
 
     public static void createClient() {
         IOUtils.print("\n### Création d'un client ###");

@@ -1,18 +1,23 @@
 package com.epf.rentmanager.ui.cli;
 
+import com.epf.rentmanager.configuration.AppConfiguration;
 import com.epf.rentmanager.dao.Exceptions.DaoException;
 import com.epf.rentmanager.model.Reservation;
+import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.Exceptions.ServiceException;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
 import com.epf.rentmanager.utils.IOUtils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.List;
 import java.time.LocalDate;
 
 public class ReservationCLI {
 
-    private static final ReservationService reservationService = ReservationService.getInstance();
+    private static final ApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
+    private static final ReservationService reservationService = context.getBean(ReservationService.class);
 
 
     public static void createReservation() {

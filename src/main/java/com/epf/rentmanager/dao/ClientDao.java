@@ -8,51 +8,38 @@ import java.util.List;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.dao.Exceptions.DaoException;
 import com.epf.rentmanager.persistence.ConnectionManager;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ClientDao {
-	
-	private static ClientDao instance = null;
-	private ClientDao() {}
-	public static ClientDao getInstance() {
-		if(instance == null) {
-			instance = new ClientDao();
-		}
-		return instance;
-	}
 	
 	private static final String CREATE_CLIENT_QUERY = "INSERT INTO Client(nom, prenom, email, naissance) VALUES(?, ?, ?, ?);";
 	private static final String DELETE_CLIENT_QUERY = "DELETE FROM Client WHERE id=?;";
 	private static final String FIND_CLIENT_QUERY = "SELECT nom, prenom, email, naissance FROM Client WHERE id=?;";
 	private static final String FIND_CLIENTS_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client;";
 	private static final String COUNT_ALL_CLIENTS_QUERY = "SELECT COUNT(id) AS count FROM Client;";
+	private static final String UPDATE_CLIENT_QUERY = "UPDATE Client SET nom=?, prenom=?, email=?, naissance=? WHERE id=?;";
 	
 	public long create(Client client) throws DaoException {
 		int id = 0;
 		try{
-			System.out.println("ICIIIII1");
 			Connection connection = ConnectionManager.getConnection();
-			System.out.println("ICIIIII1.5");
 			PreparedStatement ps = connection.prepareStatement(CREATE_CLIENT_QUERY, Statement.RETURN_GENERATED_KEYS);
 
-			System.out.println("ICIIIII2");
 			ps.setString(1, client.getNom());
 			ps.setString(2, client.getPrenom());
 			ps.setString(3, client.getEmail());
 			ps.setDate(4, client.getNaissance());
 
-			System.out.println("ICIIIII3");
 			ResultSet resultSet = ps.getGeneratedKeys();
 
-			System.out.println("ICIIIII4");
 			if (resultSet.next()){
 				id = resultSet.getInt("id");
 			}
 
-			System.out.println("ICIIIII5");
 			ps.execute();
 			ps.close();
 			connection.close();
-			System.out.println("ICIIIII");
 			return id;
 
 		} catch (SQLException e){
@@ -91,6 +78,9 @@ public class ClientDao {
 			ps.execute();
 
 			ResultSet rs = ps.getResultSet();
+			if(rs==null){
+				return null;
+			}
 
 			while (rs.next()){
 				String nom = rs.getString("nom");
@@ -158,6 +148,25 @@ public class ClientDao {
 			return nbClients;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	public void update(Client client){
+		try{
+			Connection connection = ConnectionManager.getConnection();
+			PreparedStatement ps = connection.prepareStatement(UPDATE_CLIENT_QUERY);
+			ps.setString(1, client.getNom());
+			ps.setString(2, client.getPrenom());
+			ps.setString(3, client.getEmail());
+			ps.setDate(4, client.getNaissance());
+			ps.setInt(5, client.getId());
+
+
+			ps.execute();
+			ps.close();
+			connection.close();
+
+		} catch (SQLException e){
 		}
 	}
 
