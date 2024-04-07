@@ -45,18 +45,29 @@ public class ClientDetailServlet extends HttpServlet {
             List<Reservation> reservations = this.reservationService.findResaByClientId(id);
             List<Vehicle> vehicles = new ArrayList<>();
 
-            for(Reservation reservation: reservations){
+            for (Reservation reservation : reservations) {
                 vehicles.add(vehicleService.findById(Long.parseLong(reservation.getVehicle_id())));
             }
 
             request.setAttribute("client", client);
             request.setAttribute("rents", reservations);
             request.setAttribute("vehicles", vehicles);
-            request.setAttribute("nb_resa",reservations.size());
+            request.setAttribute("nb_resa", reservations.size());
             request.setAttribute("nb_cars", vehicles.size());
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/users/details.jsp").forward(request, response);
-        } catch (DaoException | ServiceException e) {
-            throw new RuntimeException(e);
+
+        } catch (ServiceException e) {
+            request.setAttribute("localisation", "Lors de l'affichage des infos utilisateur");
+            request.setAttribute("type_erreur", "ServiceException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
+        } catch (DaoException e) {
+            request.setAttribute("localisation", "Lors de l'affichage des infos utilisateur");
+            request.setAttribute("type_erreur", "DaoException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
 
     }

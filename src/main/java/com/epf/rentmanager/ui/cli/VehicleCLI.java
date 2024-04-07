@@ -26,7 +26,6 @@ public class VehicleCLI {
         try {
             Vehicle vehicle = new Vehicle(constructeur, modele, nbPlaces);
             long vehicleId = vehicleService.create(vehicle);
-            System.out.println(vehicle);
             IOUtils.print("Véhicule créé avec succès ! (ID : " + vehicleId + ")");
         } catch (ServiceException e) {
             IOUtils.print("Erreur lors de la création du véhicule : " + e.getMessage());

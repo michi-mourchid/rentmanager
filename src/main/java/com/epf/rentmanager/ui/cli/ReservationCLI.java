@@ -33,6 +33,8 @@ public class ReservationCLI {
             IOUtils.print("Réservation créée avec succès. ID : " + id);
         } catch (ServiceException e) {
             IOUtils.print("Erreur lors de la création de la réservation : " + e.getMessage());
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
         }
     }
 

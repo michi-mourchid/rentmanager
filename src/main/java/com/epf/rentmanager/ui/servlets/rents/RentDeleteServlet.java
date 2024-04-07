@@ -33,15 +33,24 @@ public class RentDeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-        int id = Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
 
             this.reservationService.delete(id);
+            response.sendRedirect(request.getContextPath() + "/rents");
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+            request.setAttribute("localisation", "Lors de la suppression de reservation");
+            request.setAttribute("type_erreur", "ServiceException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         } catch (DaoException e) {
-            throw new RuntimeException(e);
+            request.setAttribute("localisation", "Lors de la suppression de reservation");
+            request.setAttribute("type_erreur", "DaoException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
-        response.sendRedirect(request.getContextPath() + "/rents");
+
 
     }
 }

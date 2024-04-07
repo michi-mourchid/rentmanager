@@ -26,11 +26,13 @@ public class VehicleListServlet extends HttpServlet {
 
     @Autowired
     VehicleService vehicleService;
+
     @Override
     public void init() throws ServletException {
         super.init();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -39,10 +41,18 @@ public class VehicleListServlet extends HttpServlet {
 
             request.setAttribute("vehicles", vehicles);
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/vehicles/list.jsp").forward(request, response);
-        } catch (DaoException e) {
-            throw new RuntimeException(e);
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+            request.setAttribute("localisation", "Lors de l'obtention de la liste des vehicules");
+            request.setAttribute("type_erreur", "ServiceException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
+        } catch (DaoException e) {
+            request.setAttribute("localisation", "Lors de l'obtention de la liste des vehicules");
+            request.setAttribute("type_erreur", "DaoException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
 
     }

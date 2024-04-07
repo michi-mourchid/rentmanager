@@ -42,12 +42,24 @@ public class VehicleDetailServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             Vehicle vehicle = this.vehicleService.findById(id);
+            List<Reservation> reservations = this.reservationService.findResaByVehicleId(id);
 
             request.setAttribute("vehicle", vehicle);
+            request.setAttribute("rents", reservations);
 
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/vehicles/details.jsp").forward(request, response);
-        } catch (DaoException | ServiceException e) {
-            throw new RuntimeException(e);
+        } catch (ServiceException e) {
+            request.setAttribute("localisation", "Lors de l'affichage des infos vehicule");
+            request.setAttribute("type_erreur", "ServiceException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
+        } catch (DaoException e) {
+            request.setAttribute("localisation", "Lors de l'affichage des infos vehicule");
+            request.setAttribute("type_erreur", "DaoException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
 
     }

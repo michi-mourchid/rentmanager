@@ -29,6 +29,7 @@ public class RentListServlet extends HttpServlet {
 
     @Autowired
     ReservationService reservationService;
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -43,8 +44,18 @@ public class RentListServlet extends HttpServlet {
 
             request.setAttribute("rents", reservations);
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/rents/list.jsp").forward(request, response);
-        } catch (DaoException | ServiceException e) {
-            throw new RuntimeException(e);
+        } catch (ServiceException e) {
+            request.setAttribute("localisation", "Lors de l'obtention de la liste de reservations");
+            request.setAttribute("type_erreur", "ServiceException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
+        } catch (DaoException e) {
+            request.setAttribute("localisation", "Lors de l'obtention de la liste de reservations");
+            request.setAttribute("type_erreur", "DaoException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
 
     }

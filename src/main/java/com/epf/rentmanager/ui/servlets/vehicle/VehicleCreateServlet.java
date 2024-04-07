@@ -1,6 +1,7 @@
 package com.epf.rentmanager.ui.servlets.vehicle;
 
 import com.epf.rentmanager.configuration.AppConfiguration;
+import com.epf.rentmanager.dao.Exceptions.DaoException;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.Exceptions.ServiceException;
@@ -24,6 +25,7 @@ import java.io.IOException;
 public class VehicleCreateServlet extends HttpServlet {
     @Autowired
     VehicleService vehicleService;
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -38,16 +40,20 @@ public class VehicleCreateServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse
             response) throws ServletException, IOException {
-        String constructeur = request.getParameter("manufacturer");
-        String modele = request.getParameter("modele");
-        int nbPlaces = Integer.parseInt(request.getParameter("seats"));
-
-        Vehicle vehicle = new Vehicle(constructeur,modele, nbPlaces);
         try {
+            String constructeur = request.getParameter("manufacturer");
+            String modele = request.getParameter("modele");
+            int nbPlaces = Integer.parseInt(request.getParameter("seats"));
+            Vehicle vehicle = new Vehicle(constructeur, modele, nbPlaces);
             this.vehicleService.create(vehicle);
+            response.sendRedirect(request.getContextPath() + "/cars");
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+            request.setAttribute("localisation", "Lors de la creation de vehicule");
+            request.setAttribute("type_erreur", "ServiceException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
-        response.sendRedirect(request.getContextPath() + "/cars");
+
     }
 }

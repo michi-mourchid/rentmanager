@@ -8,48 +8,46 @@ import com.epf.rentmanager.dao.Exceptions.DaoException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.Exceptions.ServiceException;
 import org.springframework.stereotype.Service;
+import com.epf.rentmanager.ui.validators.ClientValidators;
 
 @Service
 public class ClientService {
 
 	private ClientDao clientDao;
+	private ClientValidators clientValidator = new ClientValidators();
 
-	private ClientService(ClientDao clientDao){
+	public ClientService(ClientDao clientDao){
 		this.clientDao = clientDao;
 	}
 	
 	
 	public long create(Client client) throws ServiceException, DaoException {
-		// TODO: créer un client
+		this.clientValidator.validate_create(client);
 		try {
-			if(client.getPrenom()==null || client.getPrenom().length()==0 || client.getNom()==null || client.getNom().length()==0){
-				throw new ServiceException();
-			}
 			client.setNom(client.getNom().toUpperCase());
 			return this.clientDao.create(client);
 		} catch (DaoException e) {
-			throw new RuntimeException(e);
-		} catch (ServiceException serviceException){
-			throw new ServiceException();
+			throw new ServiceException("Une erreur s'est produite au niveau de la base de donnée");
 		}
 	}
 
 	public Client findById(long id) throws ServiceException, DaoException {
-		// TODO: récupérer un client par son id
-		return this.clientDao.findById(id);
+		Client client = clientDao.findById(id);
+		clientValidator.check_if_user_is_not_in_db(client);
+		return client;
 	}
 
 	public List<Client> findAll() throws ServiceException, DaoException {
-		// TODO: récupérer tous les clients
         try {
             return this.clientDao.findAll();
         } catch (DaoException e) {
-            throw new RuntimeException(e);
+            throw new ServiceException("Une erreur s'est produite au niveau de la base de donnée");
         }
     }
 
 	public String delete(long id) throws ServiceException, DaoException {
 		Client client = findById(id);
+		this.clientValidator.check_if_user_is_not_in_db(client);
 		return this.clientDao.delete(client);
 	}
 
@@ -57,8 +55,13 @@ public class ClientService {
 		return this.clientDao.count();
 	}
 
-	public void update(Client client){
-		this.clientDao.update(client);
-	}
+	public void update(Client client) throws ServiceException{
+        try {
+			this.clientValidator.validate_edit(client);
+            this.clientDao.update(client);
+        } catch (DaoException e) {
+            throw new ServiceException("Une erreur s'est produite au niveau de la base de donnée");
+        }
+    }
 	
 }

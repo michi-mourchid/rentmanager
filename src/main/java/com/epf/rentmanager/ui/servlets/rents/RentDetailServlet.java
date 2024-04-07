@@ -50,8 +50,18 @@ public class RentDetailServlet extends HttpServlet {
             request.setAttribute("rent", reservation);
             request.setAttribute("vehicle", vehicle);
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/rents/details.jsp").forward(request, response);
-        } catch (DaoException | ServiceException e) {
-            throw new RuntimeException(e);
+        } catch (ServiceException e) {
+            request.setAttribute("localisation", "Lors de l'affichage des infos de reservation");
+            request.setAttribute("type_erreur", "ServiceException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
+        } catch (DaoException e) {
+            request.setAttribute("localisation", "Lors de l'affichage des infos de reservation");
+            request.setAttribute("type_erreur", "DaoException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
 
     }

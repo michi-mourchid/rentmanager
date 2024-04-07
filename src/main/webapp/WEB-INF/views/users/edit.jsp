@@ -31,34 +31,34 @@
                                     <label for="last_name" class="col-sm-2 control-label">Nom</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Nom" value="${client.nom}">
+                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Nom" value="${client.nom}" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="first_name" class="col-sm-2 control-label">Prenom</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Prenom" value="${client.prenom}">
+                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Prenom" value="${client.prenom}" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="email" class="col-sm-2 control-label">Email</label>
 
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="${client.email}">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="${client.email}" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="date_of_birth" class="col-sm-2 control-label">Date de naissance</label>
 
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Date de naissance" value="${client.naissance}">
+                                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Date de naissance" value="${client.naissance}" required>
                                     </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-info pull-right">Ajouter</button>
+                                <button type="submit" class="btn btn-info pull-right">Valider les modifications</button>
                             </div>
                             <!-- /.box-footer -->
                         </form>

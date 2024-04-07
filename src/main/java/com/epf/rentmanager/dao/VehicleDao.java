@@ -134,7 +134,6 @@ public class VehicleDao {
 
 			ps.close();
 			connection.close();
-			System.out.println(nbVehicles);
 			return nbVehicles;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

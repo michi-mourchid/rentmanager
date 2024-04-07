@@ -144,14 +144,13 @@ public class ClientDao {
 
 			ps.close();
 			connection.close();
-			System.out.println(nbClients);
 			return nbClients;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public void update(Client client){
+	public void update(Client client) throws DaoException {
 		try{
 			Connection connection = ConnectionManager.getConnection();
 			PreparedStatement ps = connection.prepareStatement(UPDATE_CLIENT_QUERY);
@@ -167,6 +166,7 @@ public class ClientDao {
 			connection.close();
 
 		} catch (SQLException e){
+			throw new DaoException();
 		}
 	}
 

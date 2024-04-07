@@ -91,10 +91,10 @@ public class Reservation {
         this.fin = fin;
     }
 
-    public String getVehicleInfos(){
+    public String getVehicleInfos() {
         String infos = null;
         try {
-            infos = ""+ this.vehicleService.findById(vehicle_id).getConstructeur()+" "+this.vehicleService.findById(vehicle_id).getModele();
+            infos = "" + this.vehicleService.findById(vehicle_id).getConstructeur() + " " + this.vehicleService.findById(vehicle_id).getModele();
             return infos;
         } catch (ServiceException e) {
             throw new RuntimeException(e);
@@ -104,10 +104,10 @@ public class Reservation {
 
     }
 
-    public String getClientInfos(){
+    public String getClientInfos() {
         String infos = null;
         try {
-            infos = ""+ this.clientService.findById(client_id).getNom()+" "+this.clientService.findById(client_id).getPrenom();
+            infos = "" + this.clientService.findById(client_id).getNom() + " " + this.clientService.findById(client_id).getPrenom();
             return infos;
         } catch (ServiceException e) {
             throw new RuntimeException(e);

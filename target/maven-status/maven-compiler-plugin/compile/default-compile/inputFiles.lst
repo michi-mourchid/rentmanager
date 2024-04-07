@@ -15,10 +15,12 @@ D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\cli\VehicleCLI.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\client\ClientCreateServlet.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\dao\ClientDao.java
+D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\validators\ReservationValidators.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\cli\ReservationCLI.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\utils\IOUtils.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\rents\RentCreateServlet.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\client\ClientListServlet.java
+D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\validators\ClientValidators.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\service\ReservationService.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\HomeServlet.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\client\ClientDeleteServlet.java
@@ -32,5 +34,6 @@ D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\vehicle\VehicleListServlet.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\configuration\AppConfiguration.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\rents\RentDeleteServlet.java
+D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\validators\VehicleValidators.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\service\Exceptions\ServiceException.java
 D:\OneDrive\Bureau\4A\LANGAGE JAVA\PROJET\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\client\ClientDetailServlet.java

@@ -33,14 +33,22 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            request.setAttribute("nbVehicles",this.vehicleService.count());
-            request.setAttribute("nbRents",this.reservationService.count());
-            request.setAttribute("nbClients",this.clientService.count());
+            request.setAttribute("nbVehicles", this.vehicleService.count());
+            request.setAttribute("nbRents", this.reservationService.count());
+            request.setAttribute("nbClients", this.clientService.count());
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+            request.setAttribute("localisation", "Lors de l'affichage de la page d'accueil");
+            request.setAttribute("type_erreur", "ServiceException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         } catch (DaoException e) {
-            throw new RuntimeException(e);
+            request.setAttribute("localisation", "Lors de l'affichage de la page d'accueil");
+            request.setAttribute("type_erreur", "DaoException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
 
     }

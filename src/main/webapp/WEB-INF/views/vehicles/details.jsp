@@ -42,6 +42,60 @@
                     <!-- /.box -->
                 </div>
                 <!-- /.col -->
+                <div class="col-md-9">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#rents" data-toggle="tab">Reservations</a></li>
+                        </ul>
+                        <div class="active tab-content">
+                            <div class="active tab-pane" id="rents">
+                                <div class="box-body no-padding">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Client</th>
+                                            <th>Date de debut</th>
+                                            <th>Date de fin</th>
+                                        </tr>
+                                        <c:forEach items="${rents}" var="rent">
+                                            <tr>
+                                                <td>${rent.id}</td>
+                                                <td>${rent.getClientInfos()}</td>
+                                                <td>${rent.debut}</td>
+                                                <td>${rent.fin}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="cars">
+                                <!-- /.box-header -->
+                                <div class="box-body no-padding">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Modele</th>
+                                            <th>Constructeur</th>
+                                            <th style=>Nombre de places</th>
+                                        </tr>
+                                        <c:forEach items="${vehicles}" var="vehicle">
+                                            <tr>
+                                                <td>${vehicle.id}.</td>
+                                                <td>${vehicle.constructeur}</td>
+                                                <td>${vehicle.modele}</td>
+                                                <td>${vehicle.nb_places}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
                 <!-- /.col -->
             </div>
             <!-- /.row -->

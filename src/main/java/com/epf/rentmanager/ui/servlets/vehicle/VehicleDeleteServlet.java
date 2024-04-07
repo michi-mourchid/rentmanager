@@ -17,6 +17,7 @@ import java.io.IOException;
 public class VehicleDeleteServlet extends HttpServlet {
     @Autowired
     VehicleService vehicleService;
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -28,9 +29,20 @@ public class VehicleDeleteServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             this.vehicleService.delete(id);
-        } catch (ServiceException | DaoException e) {
-            throw new RuntimeException(e);
+            response.sendRedirect(request.getContextPath() + "/cars");
+        } catch (ServiceException e) {
+            request.setAttribute("localisation", "Lors de la suppression de vehicule");
+            request.setAttribute("type_erreur", "ServiceException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
+        } catch (DaoException e) {
+            request.setAttribute("localisation", "Lors de la suppression de vehicule");
+            request.setAttribute("type_erreur", "DaoException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
-        response.sendRedirect(request.getContextPath() + "/cars");
+
     }
 }

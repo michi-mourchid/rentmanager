@@ -23,12 +23,12 @@ public class Client {
     }
 
     public Client(String nom, String prenom, String email, LocalDate naissance) {
+        this.id = 0;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.naissance = naissance;
     }
-
 
 
     @Override

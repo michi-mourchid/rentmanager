@@ -213,7 +213,6 @@ public class ReservationDao {
 
 			ps.close();
 			connection.close();
-			System.out.println(nbReservations);
 			return nbReservations;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -233,7 +232,6 @@ public class ReservationDao {
 			ps.setInt(5,reservation.getId());
 
 			int affectedRows = ps.executeUpdate();
-			System.out.println(affectedRows);
 			if (affectedRows > 0) {
 			} else {
 				throw new DaoException();
@@ -243,7 +241,7 @@ public class ReservationDao {
 			connection.close();
 
 		} catch (SQLException e){
-			System.out.println(e.toString());
+			throw new DaoException();
 		}
 	}
 }

@@ -34,6 +34,7 @@ public class RentCreateServlet extends HttpServlet {
     ClientService clientService;
     @Autowired
     ReservationService reservationService;
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -48,13 +49,22 @@ public class RentCreateServlet extends HttpServlet {
             List<Client> clients = this.clientService.findAll();
             request.setAttribute("vehicles", vehicles);
             request.setAttribute("clients", clients);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/rents/create.jsp").forward(request, response);
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+            request.setAttribute("localisation", "Lors de la recuperation des informations pour inscription");
+            request.setAttribute("type_erreur", "ServiceException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         } catch (DaoException e) {
-            throw new RuntimeException(e);
+            request.setAttribute("localisation", "Lors de la recuperation des informations pour inscription");
+            request.setAttribute("type_erreur", "DaoException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/rents/create.jsp").forward(request, response);
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse
@@ -62,17 +72,26 @@ public class RentCreateServlet extends HttpServlet {
 
         int client_id = Integer.parseInt(request.getParameter("client"));
         int vehicle_id = Integer.parseInt(request.getParameter("car"));
-        System.out.println(vehicle_id);
-        LocalDate debut = LocalDate.parse(request.getParameter("begin"), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        LocalDate fin = LocalDate.parse(request.getParameter("end"), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate debut = LocalDate.parse(request.getParameter("begin"));
+        LocalDate fin = LocalDate.parse(request.getParameter("end"));
 
-        Reservation reservation = new Reservation(client_id,vehicle_id,debut,fin);
-        System.out.println(reservation);
+        Reservation reservation = new Reservation(client_id, vehicle_id, debut, fin);
         try {
             this.reservationService.create(reservation);
+            response.sendRedirect(request.getContextPath() + "/rents");
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+            request.setAttribute("localisation", "Lors de la creation de reservation");
+            request.setAttribute("type_erreur", "ServiceException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
+        } catch (DaoException e) {
+            request.setAttribute("localisation", "Lors de la creation de reservation");
+            request.setAttribute("type_erreur", "DaoException");
+            request.setAttribute("message_erreur", e.getMessage());
+            request.setAttribute("path", request.getServletPath()+"?"+(request.getQueryString()==null ? "":request.getQueryString()));
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
-        response.sendRedirect(request.getContextPath() + "/rents");
+
     }
 }
